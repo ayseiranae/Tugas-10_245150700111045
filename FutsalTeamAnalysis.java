@@ -16,7 +16,6 @@ class Pemain {
 
 public class FutsalTeamAnalysis {
     public static void main(String[] args) {
-        // a) Data Tim A dan B
         ArrayList<Pemain> timA = new ArrayList<>(Arrays.asList(
             new Pemain(168, 50), new Pemain(170, 60), new Pemain(165, 56),
             new Pemain(168, 55), new Pemain(172, 60), new Pemain(170, 70),
@@ -35,7 +34,6 @@ public class FutsalTeamAnalysis {
         gabungan.addAll(timA);
         gabungan.addAll(timB);
 
-        // a. Urut Tinggi Asc & Desc
         gabungan.sort(Comparator.comparingInt(p -> p.tinggi));
         System.out.println("Urut Tinggi Ascending:");
         gabungan.forEach(System.out::println);
@@ -44,7 +42,6 @@ public class FutsalTeamAnalysis {
         System.out.println("\nUrut Tinggi Descending:");
         gabungan.forEach(System.out::println);
 
-        // b. Urut Berat Asc & Desc
         gabungan.sort(Comparator.comparingInt(p -> p.berat));
         System.out.println("\nUrut Berat Ascending:");
         gabungan.forEach(System.out::println);
@@ -53,11 +50,9 @@ public class FutsalTeamAnalysis {
         System.out.println("\nUrut Berat Descending:");
         gabungan.forEach(System.out::println);
 
-        // c. Nilai maksimum dan minimum
         findMinMax(timA, "Tim A");
         findMinMax(timB, "Tim B");
 
-        // d. Copy Tim B ke Tim C
         ArrayList<Pemain> timC = new ArrayList<>();
         for (Pemain p : timB) {
             timC.add(new Pemain(p.tinggi, p.berat));
@@ -66,23 +61,18 @@ public class FutsalTeamAnalysis {
         System.out.println("\nData Tim C (salinan dari Tim B):");
         timC.forEach(System.out::println);
 
-        // 2a. Simpan ke ArrayList (sudah)
-
-        // 2b. Cari tinggi 168 & 160 di Tim B
         List<Integer> tinggiB = new ArrayList<>();
         for (Pemain p : timB) tinggiB.add(p.tinggi);
         Collections.sort(tinggiB);
         System.out.println("\nTinggi 168 di Tim B: " + countOccurrences(tinggiB, 168));
         System.out.println("Tinggi 160 di Tim B: " + countOccurrences(tinggiB, 160));
 
-        // 2c. Cari berat 56 & 53 di Tim A
         List<Integer> beratA = new ArrayList<>();
         for (Pemain p : timA) beratA.add(p.berat);
         Collections.sort(beratA);
         System.out.println("\nBerat 56 di Tim A: " + countOccurrences(beratA, 56));
         System.out.println("Berat 53 di Tim A: " + countOccurrences(beratA, 53));
 
-        // 2d. Cek apakah ada tinggi/berat yang sama di Tim A dan Tim B
         Set<Integer> tinggiASet = new HashSet<>(), beratASet = new HashSet<>();
         for (Pemain p : timA) {
             tinggiASet.add(p.tinggi);
@@ -99,7 +89,6 @@ public class FutsalTeamAnalysis {
         System.out.println("Ada berat sama antara Tim A dan B? " + samaBerat);
     }
 
-    // Fungsi bantu
     public static void findMinMax(List<Pemain> tim, String nama) {
         int minTinggi = tim.stream().mapToInt(p -> p.tinggi).min().orElse(-1);
         int maxTinggi = tim.stream().mapToInt(p -> p.tinggi).max().orElse(-1);
